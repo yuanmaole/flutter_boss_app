@@ -1,0 +1,45 @@
+{
+    "data":[
+        {
+            "work":"前端开发工程师",
+            "company":"Testin",
+            "emolument":"12-16K",
+            "address":"上海 普陀区 长征",
+            "seniority":"1年以上",
+            "education":"本科",
+            "creater":"方玲",
+            "createrpost":"HR",
+            "avatar":"https://www.lgstatic.com/thumbnail_120x120/i/image2/M01/1D/DF/CgoB5ly4JK6AFBu4AACeGEp-ay0266.png",
+            "create":157421856,
+            "star":20
+        },
+        {
+            "work":"资深前端工程师",
+            "company":"贝壳找房",
+            "emolument":"18-30K*16薪",
+            "address":"上海 黄浦区 打浦桥",
+            "seniority":"3-5年",
+            "education":"本科",
+            "creater":"王皓",
+            "createrpost":"招聘经理",
+            "avatar":"https://www.lgstatic.com/thumbnail_120x120/i/image2/M01/4A/C1/CgotOV0IciKAIzffAABtgMsGk64652.png",
+            "create":157421826,
+            "star":100
+        },
+        {
+            "work":"前端开发",
+            "company":"文思海辉",
+            "emolument":"14-22K",
+            "address":"上海 浦东新区 洋泾",
+            "seniority":"3-5年",
+            "education":"本科",
+            "creater":"王化",
+            "createrpost":"HR",
+            "avatar":"https://www.lgstatic.com/thumbnail_120x120/i/image2/M01/4A/C1/CgotOV0IciKAIzffAABtgMsGk64652.png",
+            "create":157421816,
+            "star":36
+        }
+    ]
+    
+}
+    
