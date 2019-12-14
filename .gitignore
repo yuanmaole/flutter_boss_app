@@ -1,3 +1,4 @@
 build
 ios/Flutter
 ios/Pods
+android/.gradle

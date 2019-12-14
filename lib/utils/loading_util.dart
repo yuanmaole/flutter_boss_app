@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-class Loading {
+import 'screen_util.dart';
+class LoadingUtil {
   static bool isLoading = false;
 
   static void showLoading(BuildContext context) {
@@ -19,10 +19,12 @@ class Loading {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.black54,
-                  child: CupertinoActivityIndicator(),
+                  width: setWidth(100),
+                  height: setWidth(100),
+                  color:  Color.fromRGBO(0, 0, 0, 0.4),
+                  child: CupertinoActivityIndicator(
+                    radius: setWidth(20),
+                  ),
                 ),
               ),
             );

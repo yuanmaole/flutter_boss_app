@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LogUtil {
@@ -8,10 +9,16 @@ class LogUtil {
 
   //Toast
   static void showToast(String msg) {
+        // debugPrint(msg);
     Fluttertoast.showToast(msg: msg, gravity: ToastGravity.CENTER);
+
   }
-  static void showToastBottom(String msg) {
+  static void showToastCenter(String msg) {
     Fluttertoast.showToast(msg: msg, gravity: ToastGravity.BOTTOM);
+
+  }
+  static void cancelToast() {
+    Fluttertoast.cancel();
   }
 
   static void init({bool isDebug = false, String tag = _TAG_DEF}) {

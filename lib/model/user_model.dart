@@ -1,22 +1,19 @@
 class User {
   int loginType;
-  int code;
-  String msg;
+  String  phone;
   Account account;
   Profile profile;
 
   User({
     this.loginType,
-    this.code,
-    this.msg,
+    this.phone,
     this.account,
     this.profile,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['loginType'] = this.loginType;
-    data['code'] = this.code;
+    data['phone'] = this.phone;
     if (this.account != null) {
       data['account'] = this.account.toJson();
     }
@@ -28,13 +25,13 @@ class User {
   User.fromJson(Map<String, dynamic> json) {
     loginType = json['loginType'];
     profile = json['profile'];
-    account = json['account'];
-    msg = json['msg'];
+    account = Account.fromJson(json['account']);
+    phone = json['phone'];
   }
 }
 
 class Account {
-  int id;
+  String id;
   String userName;
   int status;
   String token;

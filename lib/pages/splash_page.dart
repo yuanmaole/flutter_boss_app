@@ -1,7 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_boss_app/providers/index.dart';
 import 'package:flutter_boss_app/application.dart';
+import 'package:flutter_boss_app/service/service.dart';
+import 'package:flutter_boss_app/utils/utils.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -16,6 +21,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     _scaleTween = Tween(begin: 0, end: 1);
     _logoController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500))
@@ -28,7 +34,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     _logoController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Future.delayed(Duration(milliseconds: 500), () {
+        Future.delayed(Duration(milliseconds: 1000), () {
           goPage();
         });
       }
@@ -36,19 +42,34 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   void goPage() async{
-
+    //初始化操作。。。
+    LogUtil.init(tag: 'NETEASE_MUSIC');
     await Application.init();
-    // UserStore userModel = Provider.of<UserStore>(context);
-    // userModel.initUser();
-    // if (userModel.user != null) {
-    //   await NetUtils.refreshLogin(context).then((value){
-    //     if(value.data != -1){
-    //       NavigatorUtil.goHomePage(context);
-    //     }
-    //   });
-    //   Provider.of<PlayListModel>(context).user = userModel.user;
-    // } else
-    //   NavigatorUtil.goLoginPage(context);
+    UserStore userStore = Provider.of<UserStore>(context);
+    userStore.initUser();
+    //返回拦截
+    Session.dio.interceptors.add(InterceptorsWrapper(
+    onResponse:(Response response) async {
+      if (response.statusCode == 401) {
+        userStore.clearUser();
+      } else if (response.statusCode == 403) {
+        print('签名验证失败');
+      }
+     return response; // continue
+    }));
+    //
+    if (userStore.user != null) {
+      //刷新用户信息
+      //  await NetUtils.refreshLogin(context).then((value){
+      //   if(value.data != -1){
+      //     NavigatorUtil.goHomePage(context);
+      //   }
+      // });
+      // Provider.of<PlayListModel>(context).user = userModel.user;
+      NavigatorUtil.pushName(context, '/home');
+    } else {
+      NavigatorUtil.goLoginPage(context);
+    }
   }
 
   @override
@@ -63,7 +84,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           scale: _logoAnimation,
           child: Hero(
             tag: 'logo',
-            child: Image.asset('assets/images/LaunchImage.png'),
+            child: Image.asset('assets/images/icon_logo.png')
           ),
         ),
       ),

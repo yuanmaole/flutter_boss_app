@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boss_app/router/custom_router.dart';
-import 'package:flutter_boss_app/pages/home.dart';
-import 'package:flutter_boss_app/pages/login.dart';
+import 'package:flutter_boss_app/pages/pages.dart';
 
 // import 'package:flutter_boss_app/pages/result/notfound_page.dart';
 // import 'package:flutter_boss_app/pages/result/search.dart';
 // import 'package:flutter_boss_app/pages/chat/chat_message.dart';
-class NavigatorUtils {
+class NavigatorUtil {
   static double screenWidth;
   static double screenHeight;
   static double statusBarHeight;
   static double bottomBarHeight;
 
   // 定义无参数导航
-  final GlobalKey<NavigatorState> key = GlobalKey(debugLabel: 'navigate_key');
-  final Map<String, Widget Function(BuildContext)> routes = <String, WidgetBuilder>{
+  static GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
+  
+  static final Map<String, Widget Function(BuildContext)> routes = <String, WidgetBuilder>{
+    // "/": (BuildContext context) => SplashPage(),
     "/home": (BuildContext context) => HomePage(),
-    '/login':(BuildContext context) => LoginPage()
-    
+    '/login': (BuildContext context) => LoginPage()
   };
   NavigatorState get navigator => key.currentState;
   get pushNamed => navigator.pushNamed;
@@ -40,16 +40,14 @@ class NavigatorUtils {
 //     )));
 //   }
 
-  // static gotoSearchGoodsResultPage(BuildContext context, String keywords) {
-  //   NavigatorRouter(
-  //       context,
-  //       new SearchGoodsResultPage(
-  //         keywords: keywords,
-  //       ));
-  // }
-
+  static goLoginPage(BuildContext context) {
+    Navigator.pushReplacement(context, BottomPopupRouter( LoginPage() ));
+  }
+  static goHomePage(BuildContext context) {
+    Navigator.pushReplacement(context, FadeRouter( HomePage() ));
+  }
   static NavigatorRouter(BuildContext context, Widget widget) {
-    return Navigator.push(context, new CupertinoPageRoute(builder: (context) => widget));
+    return Navigator.push(context, BottomPopupRouter(widget));
   }
 
   ///弹出 dialog
